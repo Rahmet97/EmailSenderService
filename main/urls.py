@@ -1,6 +1,6 @@
 from django.urls import path
 
-from main.views import send
+from .views import send, ok
 
 urlpatterns = [
     path('', send),

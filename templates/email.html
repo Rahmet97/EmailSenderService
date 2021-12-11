@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>Email</title>
 </head>
-<body>
+<body style="text-align: center">
     <img src="https://png.pngtree.com/png-clipart/20211116/ourmid/pngtree-2022-golden-3d-new-year-png-image_4033509.png" alt="Photo">
     <h3>{{ subject }}</h3>
-    <p>{{ message }}</p>
+    <p>Dear {{ user.first_name }} {{ user.last_name }}. {{ message }}</p>
 </body>
 </html>
