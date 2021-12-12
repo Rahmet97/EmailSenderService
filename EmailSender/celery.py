@@ -10,7 +10,18 @@ django.setup()
 
 app = Celery('EmailSender')
 
+app.conf.enable_utc = False
+app.conf.update(timezone='Asia/Tashkent')
+
 app.config_from_object('django.conf:settings', namespace='CELERY')
+
+app.conf.beat_schedule = {
+    'Send_mail_to_Client': {
+        'task': 'main.tasks.send_email',
+        'schedule': 30
+    }
+}
+
 app.autodiscover_tasks()
 
 
