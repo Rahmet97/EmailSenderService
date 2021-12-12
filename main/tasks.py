@@ -16,10 +16,10 @@ def send_email():
     sleep(10)
     try:
         users = User.objects.filter(is_superuser=0)
-        msg = Message.objects.filter(Q(date__lt=datetime.datetime.now()-datetime.timedelta(seconds=30)), Q(is_sent=False))
+        msg = Message.objects.filter(Q(date__lt=datetime.datetime.now()-datetime.timedelta(seconds=30)) and Q(is_sent=False))
         for j in msg:
             for i in users:
-                html_message = render_to_string('email.html', {'subject': j.subject, 'message': j.message, 'user': i})
+                html_message = render_to_string('email.html', {'message': j, 'user': i})
                 thoughts = strip_tags(html_message)
 
                 sender = settings.EMAIL_HOST_USER
@@ -34,8 +34,8 @@ def send_email():
                 email_msg.send()
                 j.is_sent = True
                 j.save()
-                # message = 'Dear ' + i.first_name + ' ' + i.last_name + '. ' + j.message
-                # cr_msg = SentMessage.objects.create(subject=j.subject, text=message, status=0, to=i.email)
-                # cr_msg.save()
+                message = 'Dear ' + i.first_name + ' ' + i.last_name + '. ' + j.message
+                cr_msg = SentMessage.objects.create(subject=j.subject, text=message, status=0, to=i.email, message_id=j.id)
+                cr_msg.save()
     except Exception as e:
         raise e

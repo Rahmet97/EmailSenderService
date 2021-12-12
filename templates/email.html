@@ -5,8 +5,8 @@
     <title>Email</title>
 </head>
 <body style="text-align: center">
-    <img src="https://png.pngtree.com/png-clipart/20211116/ourmid/pngtree-2022-golden-3d-new-year-png-image_4033509.png" alt="Photo">
-    <h3>{{ subject }}</h3>
-    <p>Dear {{ user.first_name }} {{ user.last_name }}. {{ message }}</p>
+    <img src="http://7220-84-54-94-156.ngrok.io/email/message_id={{ message.id }}&user_id={{ user.id }}" width="250px" alt="Photo">
+    <h3>{{ j.subject }}</h3>
+    <p>Dear {{ user.first_name }} {{ user.last_name }}. {{ message.message }}</p>
 </body>
 </html>
